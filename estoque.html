@@ -44,13 +44,16 @@
 </head>
 <body>
 
-    <header>
-        <a href="index.html" class="brand-logo">
-            <div class="car-silhouette"></div>
-            <div class="brand-name">Brasil Export Cars</div>
-        </a>
-        <a href="index.html" class="btn-back">← Voltar ao Início</a>
-    </header>
+ <header>
+    <a href="index.html" class="brand-logo">
+        <div class="car-silhouette"></div>
+        <div class="brand-name">Brasil Export Cars</div>
+    </a>
+    <div class="header-actions">
+        <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">ENGLISH</button>
+        <a href="index.html" class="btn-back">← Voltar</a>
+    </div>
+</header>
 
     <h2 class="section-title">Estoque Exclusivo</h2>
 
@@ -59,21 +62,54 @@
     <footer>© 2026 BRASIL EXPORT CARS.</footer>
 
     <script>
-        const stockData = [
-            { name: "Chevrolet Marajó", price: "US$ 22.000", img: "marajo.webp", desc: "Perua compacta rara, um ícone da versatilidade brasileira dos anos 80." },
-            { name: "Ford Del Rey", price: "US$ 18.000", img: "del rey.webp", desc: "O auge do luxo executivo nacional, conforto inigualável para a época." },
-            { name: "Miura Sport", price: "US$ 60.000", img: "miura.webp", desc: "Design futurista e tecnologia artesanal à frente do seu tempo." },
-            { name: "Santa Matilde SM 4.1", price: "US$ 75.000", img: "santa.webp", desc: "Performance de seis cilindros em um cupê de luxo extremamente exclusivo." },
-            { name: "Envemo Super 90", price: "US$ 30.000", img: "enveno.jpg", desc: "Requinte premium sobre a plataforma clássica Volkswagen." },
-            { name: "Bianco S", price: "US$ 50.000", img: "bianco.jpg", desc: "Carroceria em fibra com linhas inspiradas em competições europeias." },
-            { name: "Adamo GT", price: "US$60.000", img: "adamo.jpg", desc: "Esportivo artesanal raro, focado em exclusividade e design agressivo." },
-            { name: "Hofstetter Turbo", price: "US$50.000", img: "hofster turbo.webp", desc: "Portas asa-de-gaivota e visual de ficção científica dos anos 80." },
-            { name: "Lobini H1", price: "US$ 120.000", img: "lobini.webp", desc: "O renascimento do esportivo nacional com performance moderna." },
-            { name: "JPX Montez", price: "US$ 80.000", img: "DSCF0089-e1594835212255.webp", desc: "Poder off-road militar adaptado para o uso civil." },
-            { name: "Engesa 4", price: "US$ 12.000", img: "engera.webp", desc: "O jipe brasileiro indestrutível com DNA de blindados militares." },
-            { name: "Volkswagen TL", price: "US$ 31.000", img: "lt.png", desc: "Linhas fastback clássicas com a confiabilidade do motor a ar." },
-            { name: "Chevrolet Ômega", price: "US$ 22,000", img: "chevrolet-omega-4.1-sfi-cd-12v-gasolina-4p-automatico-WMIMAGEM00064012953 - Copia.jpg", desc: "Soberano em tecnologia e conforto. O melhor carro do Brasil nos anos 90." }
-        ];
+let currentLang = 'pt';
+
+const stockData = [
+    { name: "Chevrolet Marajó", price: "US$ 22.000", img: "marajo.webp", pt: "Perua compacta rara, um ícone da versatilidade brasileira dos anos 80.", en: "Rare compact wagon, a Brazilian icon of 80s versatility." },
+    { name: "Ford Del Rey", price: "US$ 18.000", img: "del rey.webp", pt: "O auge do luxo executivo nacional, conforto inigualável para a época.", en: "The peak of national executive luxury, unparalleled comfort for the time." },
+    { name: "Miura Sport", price: "US$ 60.000", img: "miura.webp", pt: "Design futurista e tecnologia artesanal à frente do seu tempo.", en: "Futuristic design and handcrafted technology ahead of its time." },
+    { name: "Santa Matilde SM 4.1", price: "US$ 75.000", img: "santa.webp", pt: "Performance de seis cilindros em um cupê de luxo extremamente exclusivo.", en: "Six-cylinder performance in an extremely exclusive luxury coupe." },
+    { name: "Envemo Super 90", price: "US$ 30.000", img: "enveno.jpg", pt: "Requinte premium sobre a plataforma clássica Volkswagen.", en: "Premium refinement on the classic Volkswagen platform." },
+    { name: "Bianco S", price: "US$ 50.000", img: "bianco.jpg", pt: "Carroceria em fibra com linhas inspiradas em competições europeias.", en: "Fiberglass body with lines inspired by European racing competitions." },
+    { name: "Adamo GT", price: "US$ 60.000", img: "adamo.jpg", pt: "Esportivo artesanal raro, focado em exclusividade e design agressivo.", en: "Rare handcrafted sports car, focused on exclusivity and aggressive design." },
+    { name: "Hofstetter Turbo", price: "US$ 50.000", img: "hofster turbo.webp", pt: "Portas asa-de-gaivota e visual de ficção científica dos anos 80.", en: "Gull-wing doors and 80s sci-fi aesthetic." },
+    { name: "Lobini H1", price: "US$ 120.000", img: "lobini.webp", pt: "O renascimento do esportivo nacional com performance moderna.", en: "The rebirth of the national sports car with modern performance." },
+    { name: "JPX Montez", price: "US$ 80.000", img: "DSCF0089-e1594835212255.webp", pt: "Poder off-road militar adaptado para o uso civil.", en: "Military off-road power adapted for civilian use." },
+    { name: "Engesa 4", price: "US$ 12.000", img: "engera.webp", pt: "O jipe brasileiro indestrutível com DNA de blindados militares.", en: "The indestructible Brazilian jeep with military armored DNA." },
+    { name: "Volkswagen TL", price: "US$ 31.000", img: "lt.png", pt: "Linhas fastback clássicas com a confiabilidade do motor a ar.", en: "Classic fastback lines with air-cooled engine reliability." },
+    { name: "Chevrolet Ômega", price: "US$ 22.000", img: "chevrolet-omega-4.1-sfi-cd-12v-gasolina-4p-automatico-WMIMAGEM00064012953 - Copia.jpg", pt: "Soberano em tecnologia e conforto. O melhor carro do Brasil nos anos 90.", en: "Sovereign in technology and comfort. The best car in Brazil in the 90s." }
+];
+
+function renderStock() {
+    const container = document.getElementById('stock-container');
+    const title = document.querySelector('.section-title');
+    const backBtn = document.querySelector('.btn-back');
+    
+    // Traduz Título e Botão Voltar
+    title.innerText = currentLang === 'pt' ? 'Estoque Exclusivo' : 'Exclusive Inventory';
+    backBtn.innerText = currentLang === 'pt' ? '← Voltar ao Início' : '← Back to Home';
+
+    container.innerHTML = stockData.map(car => `
+        <div class="car-card">
+            <img src="${car.img}" class="car-img" alt="${car.name}">
+            <div class="car-info">
+                <h3>${car.name}</h3>
+                <p class="car-desc">${currentLang === 'pt' ? car.pt : car.en}</p>
+                <span class="price">${car.price}</span>
+                <a href="https://wa.me/553191486870" class="btn-action">${currentLang === 'pt' ? 'Solicitar Dossiê' : 'Request Dossier'}</a>
+            </div>
+        </div>
+    `).join('');
+}
+
+function toggleLanguage() {
+    currentLang = currentLang === 'pt' ? 'en' : 'pt';
+    document.getElementById('lang-toggle').innerText = currentLang === 'pt' ? 'ENGLISH' : 'PORTUGUÊS';
+    renderStock();
+}
+
+// Inicia a página
+renderStock();
 
         function renderStock() {
             const container = document.getElementById('stock-container');
