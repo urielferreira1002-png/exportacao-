@@ -74,6 +74,7 @@
             { name: "JPX Montez", price: "Consultar", img: "jpx.png", desc: "Poder off-road militar adaptado para o uso civil." },
             { name: "Engesa 4", price: "Consultar", img: "engesa.png", desc: "O jipe brasileiro indestrutível com DNA de blindados militares." },
             { name: "Volkswagen TL", price: "Consultar", img: "tl.png", desc: "Linhas fastback clássicas com a confiabilidade do motor a ar." },
+            { name: "Chevrolet Ômega", price: "US$ 14,000", img: "omega.png", desc: "Soberano em tecnologia e conforto. O melhor carro do Brasil nos anos 90." }
         ];
 
         function renderStock() {
