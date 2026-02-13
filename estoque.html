@@ -9,7 +9,7 @@
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: white; }
         
-        /* HEADER SIMPLIFICADO PARA ESTOQUE */
+        /* HEADER COM BOTÃO VOLTAR */
         header {
             padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
             background: var(--bg-dark); border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 1000;
@@ -18,26 +18,27 @@
         .car-silhouette { width: 40px; height: 12px; background: var(--accent-beige); clip-path: polygon(0% 90%, 15% 45%, 35% 35%, 70% 40%, 90% 55%, 100% 90%); }
         .brand-name { font-size: 14px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; }
         
+        /* ESTILO DO BOTÃO VOLTAR */
+        .btn-back {
+            color: var(--accent-beige); text-decoration: none; font-size: 10px; letter-spacing: 2px;
+            text-transform: uppercase; border: 1px solid #333; padding: 8px 15px; transition: 0.3s;
+        }
+        .btn-back:hover { background: var(--accent-beige); color: black; border-color: var(--accent-beige); }
+
         .section-title { text-align: center; font-size: 1.1rem; letter-spacing: 8px; text-transform: uppercase; color: var(--accent-beige); margin: 60px 0; }
         
-        /* GRID DE ESTOQUE */
         .car-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding: 0 5% 100px 5%; }
-        .car-card { background: var(--bg-card); border: 1px solid #1a1a1a; transition: 0.4s; overflow: hidden; position: relative; }
+        .car-card { background: var(--bg-card); border: 1px solid #1a1a1a; transition: 0.4s; overflow: hidden; }
         .car-card:hover { border-color: var(--accent-beige); transform: translateY(-5px); }
-        
         .car-img { width: 100%; height: 250px; object-fit: cover; opacity: 0.8; transition: 0.5s; }
         .car-card:hover .car-img { opacity: 1; }
-        
         .car-info { padding: 25px; border-top: 1px solid #1a1a1a; }
         .car-info h3 { margin: 0; font-size: 1.2rem; font-weight: 300; letter-spacing: 1px; }
         .car-desc { color: var(--text-dim); font-size: 0.85rem; margin: 15px 0; min-height: 45px; line-height: 1.6; }
         .price { color: var(--accent-beige); font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 20px; }
         
         .btn-action { background: transparent; border: 1px solid #333; color: white; padding: 14px; width: 100%; cursor: pointer; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; transition: 0.3s; text-decoration: none; display: block; text-align: center; }
-        .btn-action:hover { background: var(--accent-beige); color: black; border-color: var(--accent-beige); }
-
-        .back-link { color: var(--text-dim); text-decoration: none; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
-        .back-link:hover { color: var(--accent-beige); }
+        .btn-action:hover { background: var(--accent-beige); color: black; }
 
         footer { padding: 40px; text-align: center; color: #333; font-size: 10px; border-top: 1px solid #1a1a1a; letter-spacing: 2px; }
     </style>
@@ -49,18 +50,16 @@
             <div class="car-silhouette"></div>
             <div class="brand-name">Brasil Export Cars</div>
         </a>
-        <a href="index.html" class="back-link">← Voltar</a>
+        <a href="index.html" class="btn-back">← Voltar ao Início</a>
     </header>
 
     <h2 class="section-title">Estoque Exclusivo</h2>
 
-    <div class="car-grid" id="stock-container">
-        </div>
+    <div class="car-grid" id="stock-container"></div>
 
     <footer>© 2026 BRASIL EXPORT CARS.</footer>
 
     <script>
-        // LISTA DE ESTOQUE COM SEUS CARROS
         const stockData = [
             { name: "Chevrolet Marajó", price: "Consultar", img: "marajo.png", desc: "Perua compacta rara, um ícone da versatilidade brasileira dos anos 80." },
             { name: "Ford Del Rey", price: "Consultar", img: "delrey.png", desc: "O auge do luxo executivo nacional, conforto inigualável para a época." },
@@ -91,7 +90,6 @@
                 </div>
             `).join('');
         }
-
         renderStock();
     </script>
 </body>
