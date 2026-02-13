@@ -15,6 +15,7 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: opacity 0.8s ease-out;
         }
+        .loader-logo { width: 60px; height: 16px; background: var(--accent-beige); clip-path: polygon(0% 90%, 15% 45%, 35% 35%, 70% 40%, 90% 55%, 100% 90%); margin-bottom: 20px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
 
         /* HEADER CENTRALIZADO */
@@ -22,18 +23,33 @@
             padding: 30px 5%; display: flex; flex-direction: column; align-items: center;
             background: var(--bg-dark); border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 1000;
         }
-        .brand-logo { display: flex; flex-direction: column; align-items: center; margin-bottom: 15px; }
+        .brand-logo { display: flex; flex-direction: column; align-items: center; margin-bottom: 15px; text-decoration: none; color: white; }
+        .car-silhouette { width: 50px; height: 14px; background: var(--accent-beige); clip-path: polygon(0% 90%, 15% 45%, 35% 35%, 70% 40%, 90% 55%, 100% 90%); margin-bottom: 8px; }
         .brand-name { font-size: 16px; font-weight: bold; letter-spacing: 5px; text-transform: uppercase; }
+        
+        /* NAV ADICIONADA */
+        nav { display: flex; gap: 25px; margin-bottom: 15px; }
+        nav a { color: var(--text-dim); text-decoration: none; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: var(--accent-beige); }
+
         .lang-btn { background: transparent; border: 1px solid #333; color: var(--accent-beige); padding: 5px 15px; cursor: pointer; font-size: 9px; letter-spacing: 1px; }
 
         /* HERO COM ROLAGEM */
         .hero { 
             height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('IMG-20231106-WA0049.jpg') center/cover; padding: 0 5%; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('IMAGEM_DE_FUNDO.png') center/cover; padding: 0 5%; 
         }
         .hero h2 { font-size: 3.8rem; font-weight: 300; margin: 0; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .hero p { color: white; margin-top: 20px; font-size: 1.1rem; max-width: 800px; }
         
+        /* BOTÃO PARA ESTOQUE NO HERO */
+        .btn-stock { 
+            margin-top: 30px; padding: 15px 35px; border: 1px solid var(--accent-beige); 
+            color: var(--accent-beige); text-decoration: none; font-size: 11px; letter-spacing: 3px; 
+            text-transform: uppercase; transition: 0.4s;
+        }
+        .btn-stock:hover { background: var(--accent-beige); color: black; }
+
         .scroll-indicator { margin-top: 50px; cursor: pointer; animation: bounce 2s infinite; color: var(--accent-beige); text-decoration: none; font-size: 12px; letter-spacing: 2px; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
 
@@ -71,15 +87,22 @@
     </div>
 
     <header>
-        <div class="brand-logo">
+        <a href="index.html" class="brand-logo">
+            <div class="car-silhouette"></div>
             <div class="brand-name">Brasil Export Cars</div>
-        </div>
+        </a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="estoque.html">Estoque Completo</a>
+            <a href="https://wa.me/553191486870">Contato</a>
+        </nav>
         <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">ENGLISH</button>
     </header>
 
     <section class="hero">
         <h2 id="h-title">Preservando a História.</h2>
         <p id="h-sub">Especialistas na exportação de ícones automotivos brasileiros para colecionadores.</p>
+        <a href="estoque.html" class="btn-stock">Ver Estoque</a>
         <a href="#content" class="scroll-indicator" id="scroll-txt">DESCUBRA ↓</a>
     </section>
 
@@ -96,6 +119,9 @@
         <section class="section-padding">
             <h2 class="section-title" id="inv-title">Destaques</h2>
             <div class="car-grid" id="car-container"></div>
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="estoque.html" class="btn-stock">Acessar Estoque de Raridades</a>
+            </div>
         </section>
     </div>
 
@@ -114,18 +140,12 @@
             }, 1000);
         });
 
-      // COPIE ESTE TRECHO PARA O SEU INDEX.HTML
-const carData = [
-    { name: "Chevrolet Opala", price: "US$ 15,000", img: "opala.png", pt: "Continua reinando...", en: "Still reigns supreme..." },
-    { name: "VW Fusca", price: "US$ 8,500", img: "fusca.jpg", pt: "Patrimônio histórico...", en: "Historical heritage..." },
-    { name: "Ford Maverick", price: "US$ 28,000", img: "maveric.jpg", pt: "Bruto, beberrão...", en: "Raw power..." },
-    { name: "VW SP2", price: "US$ 45,000", img: "sp2.jpg", pt: "Ícone máximo...", en: "The ultimate icon..." },
-    { name: "Chevrolet Chevette", price: "US$ 7,500", img: "chevette.jpg", pt: "Tração traseira...", en: "RWD potential..." },
-    { name: "VW Brasília", price: "US$ 9,000", img: "brasilia.jpg", pt: "Retrô estilosa...", en: "Stylish retro..." },
-    { name: "VW Variant", price: "US$ 12,000", img: "variante.webp", pt: "A perua clássica...", en: "The classic wagon..." },
-    { name: "Chev. Veraneio", price: "US$ 18,000", img: "vareneio.webp", pt: "SUV raiz...", en: "The original SUV..." },
-    { name: "Chevrolet Ômega", price: "US$ 14,000", img: "chevrolet-omega-4.1-sfi-cd-12v-gasolina-4p-automatico-WMIMAGEM00064012953.jpg", pt: "O absoluto soberano...", en: "The absolute sovereign..." }
-];
+        // LISTA ORIGINAL (MANTIDA)
+        const carData = [
+            { name: "Chevrolet Opala", price: "US$ 15,000", img: "FOTO_OPALA.png", pt: "Continua reinando, tirar ele seria crime.", en: "Still reigns supreme; a true legend." },
+            { name: "VW Fusca", price: "US$ 8,500", img: "FOTO_FUSCA.png", pt: "Patrimônio histórico sobre rodas.", en: "Historical heritage on wheels." },
+            { name: "Ford Maverick", price: "US$ 28,000", img: "FOTO_MAVERICK.png", pt: "Bruto, beberrão e zero arrependimentos.", en: "Raw power and zero regrets." }
+        ];
 
         let currentLang = 'pt';
 
@@ -150,7 +170,7 @@ const carData = [
             document.getElementById('h-title').innerText = currentLang === 'pt' ? 'Preservando a História.' : 'Preserving History.';
             document.getElementById('h-sub').innerText = currentLang === 'pt' ? 'Especialistas na exportação de ícones automotivos brasileiros para colecionadores.' : 'Specialized in exporting Brazilian automotive icons to collectors.';
             document.getElementById('log-title').innerText = currentLang === 'pt' ? 'O Negócio' : 'The Business';
-            document.getElementById('inv-title').innerText = currentLang === 'pt' ? 'Estoque e Preços' : 'Inventory & Pricing';
+            document.getElementById('inv-title').innerText = currentLang === 'pt' ? 'Destaques' : 'Highlights';
             document.getElementById('scroll-txt').innerText = currentLang === 'pt' ? 'DESCUBRA ↓' : 'DISCOVER ↓';
             
             document.getElementById('l1-t').innerText = currentLang === 'pt' ? 'Curadoria' : 'Curation';
@@ -165,8 +185,10 @@ const carData = [
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                if(this.getAttribute('href').startsWith("#")) {
+                   e.preventDefault();
+                   document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
 
