@@ -39,4 +39,22 @@ footer {
     text-align: center; /* Isso vai centralizar o texto e o logo */
     border-top: 1px solid #333;
     margin-top: 50px;
+
+}/* Botão de Idioma */
+.lang-btn { 
+    background: transparent; 
+    border: 1px solid var(--accent-beige); 
+    color: var(--accent-beige); 
+    padding: 8px 15px; 
+    cursor: pointer; 
+    font-size: 9px; 
+    letter-spacing: 1px; 
+    text-transform: uppercase;
+    transition: 0.3s;
+    margin-right: 15px;
 }
+.lang-btn:hover {
+    background: var(--accent-beige);
+    color: black;
+}
+.header-actions { display: flex; align-items: center; }
