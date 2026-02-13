@@ -9,122 +9,117 @@
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: white; }
         
-        /* HEADER COM BOTÃO VOLTAR */
+        /* HEADER */
         header {
             padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
             background: var(--bg-dark); border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 1000;
         }
         .brand-logo { display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; }
+        .car-silhouette { width: 40px; height: 12px; background: var(--accent-beige); clip-path: polygon(0% 90%, 15% 45%, 35% 35%, 70% 40%, 90% 55%, 100% 90%); }
         .brand-name { font-size: 14px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; }
         
-        /* ESTILO DO BOTÃO VOLTAR */
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* BOTÃO TRADUTOR */
+        .lang-btn { 
+            background: transparent; border: 1px solid var(--accent-beige); color: var(--accent-beige); 
+            padding: 8px 15px; cursor: pointer; font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .lang-btn:hover { background: var(--accent-beige); color: black; }
+
+        /* BOTÃO VOLTAR */
         .btn-back {
-            color: var(--accent-beige); text-decoration: none; font-size: 10px; letter-spacing: 2px;
+            color: var(--text-dim); text-decoration: none; font-size: 10px; letter-spacing: 2px;
             text-transform: uppercase; border: 1px solid #333; padding: 8px 15px; transition: 0.3s;
         }
-        .btn-back:hover { background: var(--accent-beige); color: black; border-color: var(--accent-beige); }
+        .btn-back:hover { color: var(--accent-beige); border-color: var(--accent-beige); }
 
         .section-title { text-align: center; font-size: 1.1rem; letter-spacing: 8px; text-transform: uppercase; color: var(--accent-beige); margin: 60px 0; }
         
+        /* GRID DE CARROS */
         .car-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding: 0 5% 100px 5%; }
         .car-card { background: var(--bg-card); border: 1px solid #1a1a1a; transition: 0.4s; overflow: hidden; }
         .car-card:hover { border-color: var(--accent-beige); transform: translateY(-5px); }
         .car-img { width: 100%; height: 250px; object-fit: cover; opacity: 0.8; transition: 0.5s; }
         .car-card:hover .car-img { opacity: 1; }
+        
         .car-info { padding: 25px; border-top: 1px solid #1a1a1a; }
         .car-info h3 { margin: 0; font-size: 1.2rem; font-weight: 300; letter-spacing: 1px; }
         .car-desc { color: var(--text-dim); font-size: 0.85rem; margin: 15px 0; min-height: 45px; line-height: 1.6; }
         .price { color: var(--accent-beige); font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 20px; }
         
         .btn-action { background: transparent; border: 1px solid #333; color: white; padding: 14px; width: 100%; cursor: pointer; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; transition: 0.3s; text-decoration: none; display: block; text-align: center; }
-        .btn-action:hover { background: var(--accent-beige); color: black; }
+        .btn-action:hover { background: var(--accent-beige); color: black; border-color: var(--accent-beige); }
 
         footer { padding: 40px; text-align: center; color: #333; font-size: 10px; border-top: 1px solid #1a1a1a; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
- <header>
-    <a href="index.html" class="brand-logo">
-        <div class="car-silhouette"></div>
-        <div class="brand-name">Brasil Export Cars</div>
-    </a>
-    <div class="header-actions">
-        <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">ENGLISH</button>
-        <a href="index.html" class="btn-back">← Voltar</a>
-    </div>
-</header>
+    <header>
+        <a href="index.html" class="brand-logo">
+            <div class="car-silhouette"></div>
+            <div class="brand-name">Brasil Export Cars</div>
+        </a>
+        <div class="header-actions">
+            <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">ENGLISH</button>
+            <a href="index.html" class="btn-back" id="back-txt">← Voltar</a>
+        </div>
+    </header>
 
-    <h2 class="section-title">Estoque Exclusivo</h2>
+    <h2 class="section-title" id="page-title">Estoque Exclusivo</h2>
 
     <div class="car-grid" id="stock-container"></div>
 
     <footer>© 2026 BRASIL EXPORT CARS.</footer>
 
     <script>
-let currentLang = 'pt';
+        let currentLang = 'pt';
 
-const stockData = [
-    { name: "Chevrolet Marajó", price: "US$ 22.000", img: "marajo.webp", pt: "Perua compacta rara, um ícone da versatilidade brasileira dos anos 80.", en: "Rare compact wagon, a Brazilian icon of 80s versatility." },
-    { name: "Ford Del Rey", price: "US$ 18.000", img: "del rey.webp", pt: "O auge do luxo executivo nacional, conforto inigualável para a época.", en: "The peak of national executive luxury, unparalleled comfort for the time." },
-    { name: "Miura Sport", price: "US$ 60.000", img: "miura.webp", pt: "Design futurista e tecnologia artesanal à frente do seu tempo.", en: "Futuristic design and handcrafted technology ahead of its time." },
-    { name: "Santa Matilde SM 4.1", price: "US$ 75.000", img: "santa.webp", pt: "Performance de seis cilindros em um cupê de luxo extremamente exclusivo.", en: "Six-cylinder performance in an extremely exclusive luxury coupe." },
-    { name: "Envemo Super 90", price: "US$ 30.000", img: "enveno.jpg", pt: "Requinte premium sobre a plataforma clássica Volkswagen.", en: "Premium refinement on the classic Volkswagen platform." },
-    { name: "Bianco S", price: "US$ 50.000", img: "bianco.jpg", pt: "Carroceria em fibra com linhas inspiradas em competições europeias.", en: "Fiberglass body with lines inspired by European racing competitions." },
-    { name: "Adamo GT", price: "US$ 60.000", img: "adamo.jpg", pt: "Esportivo artesanal raro, focado em exclusividade e design agressivo.", en: "Rare handcrafted sports car, focused on exclusivity and aggressive design." },
-    { name: "Hofstetter Turbo", price: "US$ 50.000", img: "hofster turbo.webp", pt: "Portas asa-de-gaivota e visual de ficção científica dos anos 80.", en: "Gull-wing doors and 80s sci-fi aesthetic." },
-    { name: "Lobini H1", price: "US$ 120.000", img: "lobini.webp", pt: "O renascimento do esportivo nacional com performance moderna.", en: "The rebirth of the national sports car with modern performance." },
-    { name: "JPX Montez", price: "US$ 80.000", img: "DSCF0089-e1594835212255.webp", pt: "Poder off-road militar adaptado para o uso civil.", en: "Military off-road power adapted for civilian use." },
-    { name: "Engesa 4", price: "US$ 12.000", img: "engera.webp", pt: "O jipe brasileiro indestrutível com DNA de blindados militares.", en: "The indestructible Brazilian jeep with military armored DNA." },
-    { name: "Volkswagen TL", price: "US$ 31.000", img: "lt.png", pt: "Linhas fastback clássicas com a confiabilidade do motor a ar.", en: "Classic fastback lines with air-cooled engine reliability." },
-    { name: "Chevrolet Ômega", price: "US$ 22.000", img: "chevrolet-omega-4.1-sfi-cd-12v-gasolina-4p-automatico-WMIMAGEM00064012953 - Copia.jpg", pt: "Soberano em tecnologia e conforto. O melhor carro do Brasil nos anos 90.", en: "Sovereign in technology and comfort. The best car in Brazil in the 90s." }
-];
-
-function renderStock() {
-    const container = document.getElementById('stock-container');
-    const title = document.querySelector('.section-title');
-    const backBtn = document.querySelector('.btn-back');
-    
-    // Traduz Título e Botão Voltar
-    title.innerText = currentLang === 'pt' ? 'Estoque Exclusivo' : 'Exclusive Inventory';
-    backBtn.innerText = currentLang === 'pt' ? '← Voltar ao Início' : '← Back to Home';
-
-    container.innerHTML = stockData.map(car => `
-        <div class="car-card">
-            <img src="${car.img}" class="car-img" alt="${car.name}">
-            <div class="car-info">
-                <h3>${car.name}</h3>
-                <p class="car-desc">${currentLang === 'pt' ? car.pt : car.en}</p>
-                <span class="price">${car.price}</span>
-                <a href="https://wa.me/553191486870" class="btn-action">${currentLang === 'pt' ? 'Solicitar Dossiê' : 'Request Dossier'}</a>
-            </div>
-        </div>
-    `).join('');
-}
-
-function toggleLanguage() {
-    currentLang = currentLang === 'pt' ? 'en' : 'pt';
-    document.getElementById('lang-toggle').innerText = currentLang === 'pt' ? 'ENGLISH' : 'PORTUGUÊS';
-    renderStock();
-}
-
-// Inicia a página
-renderStock();
+        const stockData = [
+            { name: "Chevrolet Marajó", price: "US$ 22.000", img: "marajo.webp", pt: "Perua compacta rara, um ícone da versatilidade brasileira dos anos 80.", en: "Rare compact wagon, a Brazilian icon of 80s versatility." },
+            { name: "Ford Del Rey", price: "US$ 18.000", img: "del rey.webp", pt: "O auge do luxo executivo nacional, conforto inigualável para a época.", en: "The peak of national executive luxury, unparalleled comfort for the time." },
+            { name: "Miura Sport", price: "US$ 60.000", img: "miura.webp", pt: "Design futurista e tecnologia artesanal à frente do seu tempo.", en: "Futuristic design and handcrafted technology ahead of its time." },
+            { name: "Santa Matilde SM 4.1", price: "US$ 75.000", img: "santa.webp", pt: "Performance de seis cilindros em um cupê de luxo extremamente exclusivo.", en: "Six-cylinder performance in an extremely exclusive luxury coupe." },
+            { name: "Envemo Super 90", price: "US$ 30.000", img: "enveno.jpg", pt: "Requinte premium sobre a plataforma clássica Volkswagen.", en: "Premium refinement on the classic Volkswagen platform." },
+            { name: "Bianco S", price: "US$ 50.000", img: "bianco.jpg", pt: "Carroceria em fibra com linhas inspiradas em competições europeias.", en: "Fiberglass body with lines inspired by European racing." },
+            { name: "Adamo GT", price: "US$ 60.000", img: "adamo.jpg", pt: "Esportivo artesanal raro, focado em exclusividade e design agressivo.", en: "Rare handcrafted sports car, focused on exclusivity and aggressive design." },
+            { name: "Hofstetter Turbo", price: "US$ 50.000", img: "hofster turbo.webp", pt: "Portas asa-de-gaivota e visual de ficção científica dos anos 80.", en: "Gull-wing doors and 80s sci-fi aesthetic." },
+            { name: "Lobini H1", price: "US$ 120.000", img: "lobini.webp", pt: "O renascimento do esportivo nacional com performance moderna.", en: "The rebirth of the national sports car with modern performance." },
+            { name: "JPX Montez", price: "US$ 80.000", img: "DSCF0089-e1594835212255.webp", pt: "Poder off-road militar adaptado para o uso civil.", en: "Military off-road power adapted for civilian use." },
+            { name: "Engesa 4", price: "US$ 12.000", img: "engera.webp", pt: "O jipe brasileiro indestrutível com DNA de blindados militares.", en: "The indestructible Brazilian jeep with military armored DNA." },
+            { name: "Volkswagen TL", price: "US$ 31.000", img: "lt.png", pt: "Linhas fastback clássicas com a confiabilidade do motor a ar.", en: "Classic fastback lines with air-cooled engine reliability." },
+            { name: "Chevrolet Ômega", price: "US$ 22.000", img: "chevrolet-omega-4.1-sfi-cd-12v-gasolina-4p-automatico-WMIMAGEM00064012953 - Copia.jpg", pt: "Soberano em tecnologia e conforto. O melhor carro do Brasil nos anos 90.", en: "Sovereign in technology and comfort. The best car in Brazil in the 90s." }
+        ];
 
         function renderStock() {
             const container = document.getElementById('stock-container');
+            const title = document.getElementById('page-title');
+            const backBtn = document.getElementById('back-txt');
+            
+            title.innerText = currentLang === 'pt' ? 'Estoque Exclusivo' : 'Exclusive Inventory';
+            backBtn.innerText = currentLang === 'pt' ? '← Voltar' : '← Back';
+
             container.innerHTML = stockData.map(car => `
                 <div class="car-card">
                     <img src="${car.img}" class="car-img" alt="${car.name}">
                     <div class="car-info">
                         <h3>${car.name}</h3>
-                        <p class="car-desc">${car.desc}</p>
+                        <p class="car-desc">${currentLang === 'pt' ? car.pt : car.en}</p>
                         <span class="price">${car.price}</span>
-                        <a href="https://wa.me/553191486870" class="btn-action">Solicitar Dossiê</a>
+                        <a href="https://wa.me/553191486870" class="btn-action">${currentLang === 'pt' ? 'Solicitar Dossiê' : 'Request Dossier'}</a>
                     </div>
                 </div>
             `).join('');
         }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'pt' ? 'en' : 'pt';
+            document.getElementById('lang-toggle').innerText = currentLang === 'pt' ? 'ENGLISH' : 'PORTUGUÊS';
+            renderStock();
+        }
+
         renderStock();
     </script>
 </body>
